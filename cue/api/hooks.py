@@ -31,7 +31,7 @@ class ConfigHook(hooks.PecanHook):
     """Attach the config object to the request so controllers can get to it."""
 
     def before(self, state):
-        state.request.cfg = cfg.CONF
+        state.request.cfg = cfg.CONF # OSLO library for parsing configuration files
 
 
 # class DBHook(hooks.PecanHook):
@@ -80,6 +80,7 @@ class ContextHook(hooks.PecanHook):
         #is_admin = policy.check('admin', state.request.headers, creds)
         #TODO (dagnello): temp workaround to disably policy check for now
         is_admin = True
+        print "hello world!"
 
         state.request.context = context.RequestContext(
             auth_token=auth_token,
