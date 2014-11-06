@@ -23,7 +23,7 @@ import wsmeext.pecan as wsme_pecan
 
 from cue.api.controllers import base
 from cue.api.controllers import link
-# from cue.api.controllers import v1
+from cue.api.controllers import v1
 
 
 class Version(base.APIBase):
@@ -68,7 +68,6 @@ class Root(base.APIBase):
         root.default_version = Version.convert('v1')
         return root
 
-
 class RootController(rest.RestController):
 
     _versions = ['v1']
@@ -76,14 +75,14 @@ class RootController(rest.RestController):
 
     _default_version = 'v1'
     "The default API version"
-
-    #v1 = v1.Controller()
+    v1 = v1.V1Controller()
 
     @wsme_pecan.wsexpose(Root)
     def get(self):
         # NOTE: The reason why convert() it's being called for every
         #       request is because we need to get the host url from
         #       the request object to make the links.
+        print "root controller get"
         return Root.convert()
 
     @pecan.expose()

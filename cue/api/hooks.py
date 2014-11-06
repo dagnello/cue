@@ -31,7 +31,7 @@ class ConfigHook(hooks.PecanHook):
     """Attach the config object to the request so controllers can get to it."""
 
     def before(self, state):
-        state.request.cfg = cfg.CONF # OSLO library for parsing configuration files
+        state.request.cfg = cfg.CONF  # OSLO library for parsing configuration files and command line arguments
 
 
 # class DBHook(hooks.PecanHook):
@@ -67,12 +67,19 @@ class ContextHook(hooks.PecanHook):
 
     def before(self, state):
         user_id = state.request.headers.get('X-User-Id')
+        print user_id
         user_id = state.request.headers.get('X-User', user_id)
+        print user_id
         tenant = state.request.headers.get('X-Tenant-Id')
+        print tenant
         tenant = state.request.headers.get('X-Tenant', tenant)
+        print tenant
         domain_id = state.request.headers.get('X-User-Domain-Id')
+        print domain_id
         domain_name = state.request.headers.get('X-User-Domain-Name')
+        print domain_name
         auth_token = state.request.headers.get('X-Auth-Token')
+        print auth_token
         creds = {'roles': state.request.headers.get('X-Roles', '').split(',')}
 
         is_public_api = state.request.environ.get('is_public_api', False)
